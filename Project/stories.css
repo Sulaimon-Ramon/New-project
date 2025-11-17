@@ -1,0 +1,252 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Jakarta, sans-serif;
+}
+
+body {
+    background-color: #f2f7f8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 831vh;
+}
+
+wrapper {
+    height: 12vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: box-shadow 0.3s ease;
+}
+
+
+
+wrapper.scrolled {
+    box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+header {
+    width: 77%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logoholder {
+    width: 55%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    height: 100%;
+    width: 27%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        cursor: pointer;
+    }
+}
+
+.nav {
+    height: 100%;
+    width: 64%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    p1 {
+        font-size: 17px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #1d3246;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    a{
+        text-decoration: none;
+        color: #1d3246;
+    }
+}
+
+.dropdown {
+    width: 33vw;
+    height: 40vh;
+    background-color: white;
+    position: absolute;
+    border-radius: 10px;
+    color: black;
+    top: 32px;
+    left: -57px;
+    z-index: 1;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+.drop-down {
+    width: 30.5vw;
+    height: 38vh;
+    background-color: white;
+    position: absolute;
+    border-radius: 10px;
+    color: black;
+    top: 32px;
+    left: 250px;
+    z-index: 1;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+.nav p1:hover .dropdown {
+    display: block;
+}
+
+.nav p1:hover .drop-down {
+    display: block;
+}
+
+.dropdown-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown-wrapper1 {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    margin-right: 15px;
+    margin-left: 10px;
+}
+
+.dropdown-options {
+    width: 100%;
+    height: 20%;
+    border-radius: 10px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown-options:hover {
+    background-color: hsl(0, 0%, 97%);
+    border-radius: 10px;
+
+    .hover-text {
+        color: #000;
+    }
+
+    .piggy {
+        color: #003399;
+    }
+
+    .safe {
+        color: rgb(50, 150, 255);
+    }
+
+    .target {
+        color: rgb(6, 155, 64);
+    }
+
+    .flex {
+        color: rgb(229, 40, 142);
+    }
+
+    .house {
+        color: rgb(255, 120, 60);
+    }
+
+}
+
+
+.logo1 {
+    width: 23%;
+    height: 75%;
+}
+
+
+.text1 {
+    width: 65%;
+    height: 75%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 10px;
+
+    .hover-text {
+        color: #3d4f60;
+    }
+
+    h4 {
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+}
+
+.buttonholder {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.sign-in {
+    height: 70%;
+    width: 33%;
+    cursor: pointer;
+    font-size: 17px;
+    border-radius: 10px;
+    background-color: #f2f7f8;
+    border-color: rgb(18, 34, 49);
+    border-style: solid;
+    border-width: 1.5px;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Create-free-account {
+    height: 70%;
+    width: 63%;
+    cursor: pointer;
+    color: white;
+    font-size: 17px;
+    border-radius: 10px;
+    background-color: rgb(18, 34, 49);
+    border: none;
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

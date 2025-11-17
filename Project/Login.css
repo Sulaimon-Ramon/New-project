@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+   font-family: PlusJakartaSans-SemiBold, sans-serif;
+    font-style: normal;
+}
+
+section {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    width: 32%;
+    height: 70%;
+    gap: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    div {
+        width: 90%;
+        height: 15%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+        label{
+            color: gray;
+            font-size: 15px;
+        }
+
+        input{
+            width: 92%;
+            height: 63%;
+            font-weight: bold;
+            border-radius: 10px;
+            padding-left: 15px;
+            padding-right: 15px;
+            outline: rgb(208, 208, 208) none;
+            border: 1px solid lightgrey;
+            background-color: rgb(235, 235, 235);
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus{
+            border-color: rgb(29, 78, 216);
+        }
+    }
+    
+    button{
+       width: 90%;
+        height: 10%; 
+        margin-top: 20px;
+        background-color: #4983d4;
+        border-radius: 10px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        color: white;
+        font-size: 15px;
+    }
+    .div {
+        width: 90%;
+        height: 22%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        p{
+            color: rgb(29, 78, 216);
+            cursor: pointer;
+        }
+
+        span{
+            color: black;
+            cursor: pointer;
+        }
+    }
+}
+
+div1 {
+    width: 90%;
+    height: 18%;
+    display: flex;
+    justify-content: space-between;
+
+    .text {
+        width: 70%;
+        height: 80%;
+        margin-top: 15px;
+
+        p{
+            color: gray;
+        }
+    }
+
+    .icon {
+        width: 50px;
+        height: 50px;
+         margin-top: 15px;
+        background-color: #0d60d8;
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+}

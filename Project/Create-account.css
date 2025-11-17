@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Jakarta, sans-serif;
+}
+
+section {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form {
+    width: 32%;
+    height: 55%;
+    margin-top: 100px;
+    gap: 30px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    .nav {
+        margin-top: 40px;
+        color: rgb(29, 78, 216);
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 15px;
+    }
+
+}
+
+div1 {
+    width: 90%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    h1 {
+        font-size: 35px;
+        font-family: PlusJakartaSans-SemiBold, sans-serif;
+        font-style: normal;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        img{
+            width: 60px;
+            height: 65px;
+            mix-blend-mode: multiply;
+        }
+    }
+
+    p {
+        color: gray;
+    }
+}
+
+
+div {
+    width: 90%;
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    label {
+        color: gray;
+        font-weight: bold;
+        font-size: 14px;
+
+        span {
+            color: red;
+            margin-left: 5px;
+        }
+    }
+
+    input {
+        width: 92%;
+        height: 63%;
+        font-weight: bold;
+        border-radius: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        outline: rgb(208, 208, 208) none;
+        border: 1px solid lightgrey;
+        background-color: rgb(235, 235, 235);
+        transition: border-color 0.3s ease;
+
+    }
+
+    input:focus {
+        border-color: rgb(29, 78, 216);
+    }
+}
+
+button {
+    width: 90%;
+    height: 13%;
+    margin-top: 20px;
+    background-color: #4983d4;
+    border-radius: 10px;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 15px;
+    font-family: PlusJakartaSans-SemiBold, sans-serif;
+    font-style: normal;
+}

@@ -1,11 +1,17 @@
 
 // Variables
 
-let name = "ramon";
+let name = "Ramon";
 console.log(name);
+
+let surname = "Gonzalez";
+console.log(surname);
+console.log("My full name is " + name + " " + surname);
 
 let age = 18;
 console.log(age);
+
+
 
 // Operators
 

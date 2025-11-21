@@ -43,6 +43,7 @@ header {
 .logoholder {
     width: 55%;
     height: 70%;
+    background-color: red;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -51,6 +52,7 @@ header {
 .logo {
     height: 100%;
     width: 27%;
+    background-color: greenyellow;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -272,15 +274,17 @@ header {
         margin-left: 20px;
     }
 
-
-}
-
-@media only screen and (max-width: 600px) {
-    header {
+    .logo{
+       img{
         width: 100%;
-        background-color: red;
+        max-width: 900px;
+        
+       } 
+
     }
+
 }
+
 
 
 .bodyholder {

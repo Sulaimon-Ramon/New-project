@@ -1,7 +1,7 @@
-// #include <stdio.h>
-// #include <time.h>
-// #include <stdlib.h>
-// #include <stdbool.h>
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 
 
@@ -157,10 +157,10 @@ int main() {
     }
     
 
-    // time_t currentTime ;
-    // time(&currentTime);
-    // printf("current time is %s", ctime
-    // (&currentTime));
+    time_t currentTime ;
+    time(&currentTime);
+    printf("current time is %s", ctime
+    (&currentTime));
         
     int r = rand();
     printf("%d\n", r);
@@ -188,14 +188,14 @@ int main() {
     
     printf("The sum of the numbers is: %d\n", sum);
 
-     // boolean comparision operators
+    // boolean comparision operators
     
-    // int num = 16;
-    // double height = 30.5;
+    int num = 16;
+    double height = 30.5;
   
-    // bool result = (num >= 10) && (height < 60);
+    bool result = (num >= 10) && (height < 60);
   
-    // printf("%d\n", result);
+    printf("%d\n", result);
     
     
     int myNumbers[] = {35,40,19,16};    

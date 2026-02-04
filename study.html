@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Learning Document Object Model (DOM)</h1>
+    <h2 id="text"></h2>
+    <h2 id="date"></h2>
+    <h3 id="message">Aptech Students</h3>
+    <button id="btn" onclick="changeText()">Click me</button>
+
+
+    <h1 id="text">Hello World! &#128512</h1>
+
+
+    <button id="btn1">Click!</button>
+
+    <div>
+        <input id="a" type="number" placeholder="Enter a Number">
+        <input id="b" type="number" placeholder="Enter a Number">
+
+        <div id="btn2">
+            <button onclick="addition()">Add</button>
+            <button onclick="subtraction()">Minus</button>
+            <button onclick="multiplication()">Multiply</button>
+            <button onclick="division()">Divide</button>
+
+        </div>
+        <h3 id="answer"></h3>
+    </div>
+
+    Enter your Name : <input type="text" id="nameInput" onchange="change()">
+
+    <div style="background-color: aqua; width: 120px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 10px; margin: 10px 0;" onmouseover = "mouseHover(this);"onmouseout = "mouseOut(this);">Hover Me</div>
+
+    <button id="mybtn">Try it</button>
+
+    <script>
+
+        document.getElementById("text").style = "color: red";
+        document.getElementById("btn2").style = "margin: 10px auto";
+
+        function addition() {
+            var num1 = Number(document.getElementById("a").value);
+            var num2 = Number(document.getElementById("b").value);
+            document.getElementById("answer").innerHTML = num1 + num2;
+        }
+
+        function subtraction() {
+            let num1 = Number(document.getElementById("a").value);
+            let num2 = Number(document.getElementById("b").value);
+            document.getElementById("answer").innerHTML = num1 - num2;
+        }
+
+        function multiplication() {
+            var num1 = Number(document.getElementById("a").value);
+            var num2 = Number(document.getElementById("b").value);
+            document.getElementById("answer").innerHTML = num1 * num2;
+        }
+
+        function division() {
+            var num1 = Number(document.getElementById("a").value);
+            var num2 = Number(document.getElementById("b").value);
+            document.getElementById("answer").innerHTML = num1 / num2;
+        }
+
+        document.getElementById("btn1").onclick = function () {
+            alert('Welcome!!!');
+        }
+
+        document.getElementById("btn1").style = "margin: 10px auto; background-color: red";
+
+        document.getElementById("text").innerHTML = "Hello World";
+        new Date();
+        document.getElementById("date").innerHTML = Date();
+        document.getElementById("date").style = "color: red; font-size: 1rem;";
+        document.getElementById("btn").style = " background-color: red; margin-bottom: 3rem";
+
+        function changeText() {
+            document.getElementById("message").innerHTML = "Welcome to Aptech";
+            document.getElementById("message").style = "color: Green; font-size: 2rem;"
+        }
+
+        function change() {
+            const z = document.getElementById("nameInput");
+            z.value = z.value.toUpperCase();
+        }
+
+        function mouseHover(obj) {
+            obj.style.backgroundColor = "green";
+            obj.innerHTML = "Thank You";
+        }
+
+        function mouseOut(obj) {
+            obj.style.backgroundColor = "red";
+            obj.style.color = "#fff";
+            obj.innerHTML = "Good bye!!!";
+        }
+    
+        document.getElementById("mybtn").addEventListener("click",function(){
+            alert("Button Clicked");
+        })
+    </script>
+</body>
+
+</html>

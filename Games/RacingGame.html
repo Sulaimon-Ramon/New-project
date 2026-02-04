@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Racing Game — Full</title>
+<style>
+  :root{
+    --game-w: 300px;
+    --game-h: 500px;
+    --lane-count: 3;
+    --bg: #222;
+  }
+
+  html,body{
+    height:100%;
+    margin:0;
+    background:var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#fff;
+  }
+
+  #gameArea{
+    width:var(--game-w);
+    height:var(--game-h);
+    position:relative;
+    overflow:hidden;
+    border:3px solid #ddd;
+    background:linear-gradient(#3b3b3b 0%, #2b2b2b 100%);
+    box-shadow:0 8px 30px rgba(0,0,0,.6);
+    perspective:900px; /* for slight 3D */
+  }
+
+  /* road perspective panel */
+  .road {
+    position:absolute;
+    bottom:0;
+    left:10px;
+    width:calc(100% - 20px);
+    height:120%;
+    transform-origin:bottom center;
+    transform: rotateX(18deg) translateZ(-10px);
+    background:linear-gradient(#4a4a4a 0%, #2f2f2f 100%);
+  }
+
+  /* lane separators (dashed) */
+  .laneLine{
+    position:absolute;
+    width:8px;
+    height:40px;
+    background:#fff;
+    opacity:.9;
+    border-radius:3px;
+  }
+
+  /* UI */
+  #scoreBoard, #livesBoard {
+    position:absolute;
+    z-index:20;
+    font-weight:600;
+    text-shadow:0 1px 0 rgba(0,0,0,.6);
+  }
+  #scoreBoard{ left:8px; top:6px; }
+  #livesBoard{ right:8px; top:6px; }
+
+  /* player car */
+  .car {
+    position:absolute;
+    bottom:10px;
+    width:80px;
+    height:100px;
+    z-index:15;
+    transform-origin:center center;
+    transition:left .12s ease; /* smooth lane switch */
+    pointer-events:none;
+  }
+  .car .body {
+    position:absolute;
+    inset:0;
+    mix-blend-mode: multiply;
+    background-image: url('https://png.pngtree.com/png-clipart/20250515/original/pngtree-top-view-of-a-sleek-blue-car-png-image_20979523.png'); /* red car sprite */
+    background-size:cover;
+    border-radius:6px;
+  }
+
+  /* obstacles (cars/trucks) */
+  .obstacle{
+    position:absolute;
+    top:-160px;
+    width:80px;
+    height:100px;
+    z-index:12;
+    background-size:cover;
+    mix-blend-mode: multiply;
+    border-radius:6px;
+    transition:left .12s linear;
+  }
+  .obstacle.hit{ filter:brightness(.7) saturate(.6); opacity:.9; }
+
+  /* nitro pickup */
+  .nitro {
+    position:absolute;
+    width:44px;
+    height:28px;
+    top:-70px;
+    z-index:13;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    color:#111;
+    background:linear-gradient(90deg,#ffd54d,#ff6a00);
+    border-radius:6px;
+    box-shadow:0 3px 8px rgba(255,160,0,.25);
+  }
+
+  /* small responsive tweak */
+  @media (max-width:420px){
+    #gameArea{ transform:scale(.95); }
+  }
+</style>
+</head>
+<body>
+  <div id="gameArea" tabindex="0">
+    <div class="road"></div>
+    <div id="scoreBoard">Score: 0</div>
+    <div id="livesBoard">Lives: 3</div>
+
+    <!-- player -->
+    <div class="car" id="playerCar" aria-hidden="true">
+      <div class="body"></div>
+      <div class="wheel front-left"></div>
+      <div class="wheel front-right"></div>
+      <div class="wheel back-left"></div>
+      <div class="wheel back-right"></div>
+    </div>
+  </div>
+
+<script>
+/* -------------------------
+   Configuration & DOM
+   ------------------------- */
+const gameArea = document.getElementById('gameArea');
+const playerCar = document.getElementById('playerCar');
+const scoreBoard = document.getElementById('scoreBoard');
+const livesBoard = document.getElementById('livesBoard');
+
+const GAME_W = 300;
+const GAME_H = 500;
+const LANE_COUNT = 3;
+const LANE_W = GAME_W / LANE_COUNT; // 100
+const CAR_W = 80;
+const CAR_H = 100;
+
+// center car inside lane: laneX = laneIndex*LANE_W + (LANE_W-CAR_W)/2
+const laneX = i => Math.round(i * LANE_W + (LANE_W - CAR_W)/2);
+
+const obstacles = [];
+const nitros = [];
+const laneSeparators = [];
+
+let currentLane = 1;
+let baseSpeed = 3;       // baseline speed used to compute obstacle movement
+let obstacleSpeed = baseSpeed;
+let score = 0;
+let lives = 3;
+let boostActive = false;
+let boostTimer = null;
+
+/* Preload a couple of images for obstacles (replace if you want) */
+const obstacleImages = [
+ "https://png.pngtree.com/png-vector/20250513/ourlarge/pngtree-top-view-of-a-sleek-red-sports-car-showcasing-its-aerodynamic-png-image_16254481.png",
+  "https://png.pngtree.com/png-clipart/20250111/original/pngtree-high-quality-yellow-car-overhead-perspective-png-image_19081896.png",
+];
+
+// document.getElementById(" obstacleImages").sty
+
+/* Sounds (may be blocked until user interacts) */
+const crashSound = new Audio('https://freesound.org/data/previews/256/256113_3263906-lq.mp3');
+const nitroSound = new Audio('https://freesound.org/data/previews/331/331912_3248244-lq.mp3');
+const bgMusic = new Audio('https://freesound.org/data/previews/331/331912_3248244-lq.mp3');
+bgMusic.loop = true;
+bgMusic.volume = 0.12;
+bgMusic.play().catch(()=>{});
+
+/* -------------------------
+   Build lane separators
+   ------------------------- */
+for(let row=0; row<10; row++){
+  for(let sep=1; sep<LANE_COUNT; sep++){
+    const d = document.createElement('div');
+    d.className = 'laneLine';
+    d.style.left = (LANE_W*sep - 4) + 'px'; // center the 8px wide dash between lanes
+    d.style.top = (row * 60) + 'px';
+    gameArea.appendChild(d);
+    laneSeparators.push(d);
+  }
+}
+
+/* Place player in initial lane (centered) */
+playerCar.style.left = laneX(currentLane) + 'px';
+playerCar.style.width = CAR_W + 'px';
+playerCar.style.height = CAR_H + 'px';
+
+/* -------------------------
+   Input handling
+   ------------------------- */
+let leftPressed=false, rightPressed=false;
+
+window.addEventListener('keydown', (e)=>{
+  if(e.key === 'ArrowLeft' || e.key === 'a'){ leftPressed = true; }
+  if(e.key === 'ArrowRight' || e.key === 'd'){ rightPressed = true; }
+});
+window.addEventListener('keyup', (e)=>{
+  if(e.key === 'ArrowLeft' || e.key === 'a'){ leftPressed = false; }
+  if(e.key === 'ArrowRight' || e.key === 'd'){ rightPressed = false; }
+});
+
+/* Make first user interaction resume audio if blocked */
+gameArea.addEventListener('pointerdown', ()=> {
+  bgMusic.play().catch(()=>{});
+});
+
+/* -------------------------
+   Object creators
+   ------------------------- */
+function createObstacle(){
+  const obs = document.createElement('div');
+  obs.className = 'obstacle';
+  const laneIndex = Math.floor(Math.random()*LANE_COUNT);
+  obs.style.left = laneX(laneIndex) + 'px';
+  obs.style.top = '-160px';
+  // random image
+  const img = obstacleImages[Math.floor(Math.random()*obstacleImages.length)];
+  obs.style.backgroundImage = `url(${img})`;
+  // attach bookkeeping
+  obs._lane = laneIndex;
+  obs._hit = false;     // IMPORTANT: prevents multi-hit
+  obs._w = CAR_W;
+  obs._h = CAR_H;
+  gameArea.appendChild(obs);
+  obstacles.push(obs);
+  return obs;
+}
+
+function createNitro(){
+  const n = document.createElement('div');
+  n.className = 'nitro';
+  const laneIndex = Math.floor(Math.random()*LANE_COUNT);
+  // center nitro visually inside lane
+  const left = laneX(laneIndex) + Math.round((CAR_W - 44)/2);
+  n.style.left = left + 'px';
+  n.style.top = '-80px';
+  n.textContent = 'N';
+  gameArea.appendChild(n);
+  nitros.push(n);
+  return n;
+}
+
+/* -------------------------
+   Nitro activation
+   ------------------------- */
+function activateNitro(){
+  if(boostActive){
+    // refresh duration
+    clearTimeout(boostTimer);
+  } else {
+    nitroSound.play().catch(()=>{});
+    boostActive = false;
+    // visual cue: brighten scoreBoard briefly
+    scoreBoard.style.transform = 'scale(1.04)';
+    setTimeout(()=> scoreBoard.style.transform = '', 300);
+  }
+  // While boostActive we slow obstacles (simulate car speed increase)
+ obstacleSpeed = baseSpeed * 2.2;   // or 2.5 if you want faster
+
+  // set/restart timer (3s)
+  boostTimer = setTimeout(()=>{
+    boostActive = false;
+    obstacleSpeed = baseSpeed;
+  }, 3000);
+}
+
+/* -------------------------
+   Collision helpers
+   ------------------------- */
+function rectOf(elem){
+  return {
+    left: parseInt(elem.style.left || 0),
+    top: parseInt(elem.style.top || 0),
+    w:     parseInt(elem.style.width  || elem._w || CAR_W),
+    h:     parseInt(elem.style.height || elem._h || CAR_H)
+  };
+}
+function intersects(a,b){
+  return !(a.left + a.w <= b.left || a.left >= b.left + b.w || a.top + a.h <= b.top || a.top >= b.top + b.h);
+}
+
+/* -------------------------
+   Game update loop
+   ------------------------- */
+function updateUI(){
+  scoreBoard.textContent = `Score: ${score}`;
+  livesBoard.textContent = `Lives: ${lives}`;
+}
+
+function update(dt){
+  // handle lane switching (one step per keypress)
+  if(leftPressed && currentLane > 0){
+    currentLane--;
+    leftPressed = false;
+  }
+  if(rightPressed && currentLane < LANE_COUNT-1){
+    currentLane++;
+    rightPressed = false;
+  }
+  playerCar.style.left = laneX(currentLane) + 'px';
+
+  // animate lane dashes (move downward)
+  laneSeparators.forEach(s => {
+    let top = parseInt(s.style.top);
+    top += obstacleSpeed;
+    if(top > GAME_H) top = -60;
+    s.style.top = top + 'px';
+  });
+
+  // update obstacles
+  for(let i = obstacles.length-1; i>=0; i--){
+    const obs = obstacles[i];
+    let top = parseInt(obs.style.top);
+    top += obstacleSpeed;
+    obs.style.top = top + 'px';
+
+    // if off screen => award points and remove
+    if(top > GAME_H + 50){
+      obs.remove();
+      obstacles.splice(i,1);
+      score += 10;
+      updateUI();
+      // difficulty ramp
+      if(score % 50 === 0){
+        baseSpeed += 0.4;
+        if(!boostActive) obstacleSpeed = baseSpeed;
+      }
+      continue;
+    }
+
+    // collision with player (only once)
+    const playerRect = { left: parseInt(playerCar.style.left), top: GAME_H - CAR_H - 10, w:CAR_W, h:CAR_H };
+    const obsRect = { left: parseInt(obs.style.left), top: top, w:parseInt(obs.style.width||CAR_W), h:parseInt(obs.style.height||CAR_H) };
+
+    if(!obs._hit && intersects(playerRect, obsRect)){
+      obs._hit = true;                       // mark so it doesn't repeatedly reduce lives
+      obs.classList.add('hit');
+      crashSound.play().catch(()=>{});
+      lives = Math.max(0, lives-1);
+      updateUI();
+
+      // small visual removal after collision
+      setTimeout(()=>{
+        try{ obs.remove(); }catch(e){}
+        const idx = obstacles.indexOf(obs);
+        if(idx>=0) obstacles.splice(idx,1);
+      }, 200);
+
+      if(lives <= 0){
+        // game over
+        setTimeout(()=> {
+          alert(`Game Over — Score: ${score}`);
+          location.reload();
+        }, 120);
+      }
+    }
+  }
+
+  // update nitro pickups
+  for(let i = nitros.length-1; i>=0; i--){
+    const n = nitros[i];
+    let top = parseInt(n.style.top);
+    top += obstacleSpeed;
+    n.style.top = top + 'px';
+
+    if(top > GAME_H + 30){
+      n.remove();
+      nitros.splice(i,1);
+      continue;
+    }
+
+    const playerRect = { left: parseInt(playerCar.style.left), top: GAME_H - CAR_H - 10, w:CAR_W, h:CAR_H };
+    const nRect = { left: parseInt(n.style.left), top: top, w:parseInt(n.style.width||44), h:parseInt(n.style.height||28) };
+
+    if(intersects(playerRect, nRect)){
+      // collect it
+      activateNitro();
+      try{ n.remove(); }catch(e){}
+      nitros.splice(i,1);
+    }
+  }
+}
+
+/* main RAF loop */
+let last = performance.now();
+function loop(now){
+  const dt = now - last;
+  last = now;
+  update(dt);
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+/* -------------------------
+   Spawning objects
+   ------------------------- */
+function spawnCycle(){
+  // create at least 1 obstacle per cycle
+  createObstacle();
+  // chance for nitro appear
+  if(Math.random() < 0.18){
+    createNitro();
+  }
+  // slight random spacing
+  const interval = Math.random()*1200 + 800;
+  setTimeout(spawnCycle, interval);
+}
+spawnCycle();
+
+/* -------------------------
+   Small accessibility: focus for keyboard control
+   ------------------------- */
+gameArea.focus();
+
+/* Initial UI update */
+updateUI();
+
+</script>
+</body>
+</html>

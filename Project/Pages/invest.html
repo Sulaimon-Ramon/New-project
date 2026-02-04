@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piggyvest/Invest</title>
     <link rel="icon" type="image/jpg" href="../images/fi_11818156-1.png">
+    <link rel="stylesheet" href="Queries.css">
 </head>
 
 <body>
@@ -140,20 +141,15 @@
                 <a class="sign-in" href="./Login.html">Sign in</a>
                 <a class="Create-free-account" href="./Create-account.html">Create free account</a>
             </div>
+             <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
         </header>
     </wrapper>
 
-    <script>
-        const wrapper = document.getElementById('mainWrapper');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 0) {
-                wrapper.classList.add('scrolled');
-            } else {
-                wrapper.classList.remove('scrolled');
-            }
-        });
-
-    </script>
+    <script src="Script.js"></script>
 
 </body>
 

@@ -1,0 +1,443 @@
+/* At Mobile Screen */
+
+@media only screen and (max-width: 993px) {
+
+    body {
+        background-color: aqua;
+    }
+
+    header {
+        width: 100%;
+        padding-right: 30px;
+    }
+
+    .nav {
+        width: 100%;
+        height: auto;
+        position: fixed;
+        background-color: #f2f7f8;
+        left: -100%;
+        top: 73px;
+        gap: 50px;
+        font-weight: 500;
+        text-align: center;
+        margin-top: .40rem;
+        flex-direction: column;
+        justify-content: flex-start;
+        transition: 0.3s ease-in-out;
+        padding-top: 4.5rem;
+    }
+
+    .nav.active {
+        left: 0;
+    }
+
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #1d3246;
+    }
+
+    .buttonholder {
+        width: 100%;
+        background-color: #f2f7f8;
+        position: fixed;
+        left: -100%;
+        top: 450px;
+        gap: 20px;
+        flex-direction: column;
+        justify-content: flex-start;
+        transition: 0.3s;
+        z-index: -1;
+        padding-top: 2rem;
+    }
+
+    .buttonholder.active {
+        left: 0;
+    }
+
+    .dropdown {
+        width: 90%;
+        height: 35vh;
+        background-color: white;
+        position: absolute;
+        border-radius: 10px;
+        color: black;
+        top: 110px;
+        left: 23px;
+        z-index: 1;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+
+    .piggy {
+        font-size: .8rem;
+    }
+
+    .safe {
+        font-size: .8rem;
+    }
+
+    .target {
+        font-size: .8rem;
+    }
+
+    .flex {
+        font-size: .8rem;
+    }
+
+    .flex1 {
+        font-size: .8rem;
+    }
+
+    .house {
+        font-size: .8rem;
+    }
+
+    .text1 {
+        display: flex;
+        width: 70%;
+        height: 80%;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .logo1 {
+        width: 23%;
+    }
+
+    .dropdown-wrapper1 {
+        width: 45%;
+        height: 96%;
+    }
+
+    .dropdown-options {
+        height: 25%;
+    }
+
+    .drop-down {
+        width: 92%;
+        height: 30vh;
+        background-color: white;
+        position: absolute;
+        border-radius: 10px;
+        color: black;
+        top: 380px;
+        left: 20px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+    }
+
+
+    .sign-in {
+        width: 90%;
+        height: 8%;
+    }
+
+    .Create-free-account {
+        width: 90%;
+        height: 8%;
+    }
+
+    .logoholder {
+        margin-left: 30px;
+    }
+
+    .logo {
+        min-width: 150px;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(-45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(45deg);
+    }
+
+    .bodyholder {
+        width: 90%;
+        height: 125vh;
+        display: flex;
+        margin-top: 10rem;
+        align-items: center;
+        gap: 4rem;
+        flex-direction: column;
+    }
+
+    .invest {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        margin-left: .1.5rem;
+        gap: 18px;
+    }
+
+    .first-text {
+        color: #000;
+    }
+
+    .buttonholder1 {
+        justify-content: center;
+    }
+
+    .save-options {
+        width: 90%;
+        height: 90%;
+    }
+
+    .safelock {
+        left: -40px;
+        width: 28vw;
+    }
+
+    .targetsaving {
+        width: 28vw;
+        right: -38px;
+    }
+
+    .flexnaira {
+        width: 26.2vw;
+        left: -40px;
+        top: 27vh;
+    }
+
+    .piggybank {
+        width: 25vw;
+        top: 46vh;
+        left: -40px;
+    }
+
+    .investify {
+        width: 28vw;
+        right: -38px;
+        top: 32vh;
+    }
+
+    .housemoney {
+        width: 28vw;
+        right: -38px;
+        top: 55vh;
+    }
+
+    .security {
+        width: 96%;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .security-image {
+        width: 40%;
+        height: 80%;
+        margin-bottom: 3rem;
+    }
+
+    .security-text {
+        width: 90%;
+    }
+
+    h2 {
+        font-size: 1.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .more-options {
+        width: 80%;
+        color: #000;
+        margin-left: 2rem;
+        margin-top: .5rem;
+    }
+
+    .more-options:after {
+        left: 61px;
+    }
+
+    .more-options:hover::after {
+        width: 72%;
+    }
+
+    .ways-to-save {
+        width: 90%;
+        margin-top: 20rem;
+        text-align: center;
+    }
+
+    .build-up {
+        font-size: 30px !important;
+        margin-bottom: 1.5rem;
+    }
+
+    .interest {
+        font-size: 18px !important;
+    }
+
+    .saving-options {
+        width: 80%;
+        height: auto;
+        flex-direction: column;
+        margin-top: 1rem;
+        margin-bottom: 4rem;
+    }
+
+    .saving-options-wrapper {
+        width: 100%;
+        gap: 2rem;
+    }
+
+    .savings {
+        height: 60vh;
+    }
+
+    .savings1 {
+        height: 60vh;
+    }
+
+    .savings2 {
+        margin-bottom: 2rem;
+        height: 60vh;
+    }
+
+    .savings3 {
+        height: 60vh;
+    }
+
+    .savings4 {
+        height: 60vh;
+    }
+
+    .savings5 {
+        height: 60vh;
+    }
+
+
+    .savings-wrapper {
+        text-align: center;
+    }
+
+    .head-text {
+        font-size: 2rem !important;
+    }
+
+    .body-text {
+        font-size: 18px !important;
+    }
+
+    .savings:hover .pop-up-img {
+        top: 49%;
+    }
+
+    .savings1:hover .pop-up-img {
+        top: 51%;
+    }
+
+    .savings2:hover .pop-up-img {
+        top: 49%;
+    }
+
+    .savings3:hover .pop-up-img {
+        top: 49%;
+    }
+
+    .savings4:hover .pop-up-img {
+        top: 49%;
+    }
+
+    .savings5:hover .pop-up-img {
+        top: 49%;
+    }
+
+    .savings-wrapper1 {
+        width: 31%;
+        margin-top: 110px;
+    }
+
+    .savings-wrapper1:hover::after {
+        width: 63%;
+    }
+
+    .savings-wrapper2 {
+        width: 37%;
+        margin-left: 20px;
+        margin-top: 110px;
+    }
+
+    .savings-wrapper2:hover::after {
+        width: 68%;
+    }
+
+    .savings-wrapper3 {
+        width: 27%;
+        margin-top: 110px;
+    }
+
+    .savings-wrapper4 {
+        width: 40%;
+        margin-left: 20px;
+        margin-top: 110px;
+    }
+
+    .savings-wrapper4:hover::after {
+        width: 68%;
+    }
+
+    .invest-wrapper {
+        text-align: center;
+        line-height: 45px;
+    }
+
+    .typo1{
+        font-size: 2rem !important;
+        margin-top: 2rem;
+    }
+
+    .typo2{
+        font-size: 1.1rem !important;
+    }
+
+    .investments{
+        width: 94%;
+        margin-left: 3%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .investments-wrapper{
+        width: 90%;
+        height: 60%;
+        margin-left: 0px;
+        text-align: center;
+    }
+
+    .Earn{
+        font-size: 30px !important;
+        margin-top: 60px !important;
+        margin-bottom: 30px !important;
+    }
+
+    .span {
+        font-size: 19px !important;
+        line-height: 25px !important;
+    }
+
+    .underline{
+        margin-top: 20px;
+        
+    }
+
+    .investments-image{
+        width: 90%;
+    }
+
+
+}

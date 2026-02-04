@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { 
+    background: #111; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: Arial;
+    user-select: none;
+  }
+  canvas { 
+    background: #222; 
+    margin-top: 20px; 
+    border: 2px solid #555;
+    display: none;
+  }
+  #menu {
+    margin-top: 80px;
+    text-align: center;
+  }
+  button {
+    padding: 10px 20px;
+    background: #00cc66;
+    border: none;
+    border-radius: 10px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  button:hover { background: #00aa55; }
+  select {
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 16px;
+  }
+</style>
+</head>
+<body>
+
+<h2 style="display:none;">Score: <span id="score">0</span></h2>
+
+<!-- MENU SCREEN -->
+<div id="menu">
+  <h1>🐍 SNAKE GAME</h1>
+
+  <h3>Select Snake Skin</h3>
+  <select id="skin">
+    <option value="lime">Green (Classic)</option>
+    <option value="#00e5ff">Cyan (Neon)</option>
+    <option value="#ffcc00">Gold</option>
+  </select>
+
+  <br><br>
+  <button onclick="startGame()">Start Game</button>
+</div>
+
+<!-- GAME CANVAS -->
+<canvas id="game" width="400" height="400"></canvas>
+
+<!-- RESTART BUTTON -->
+<button id="restartBtn" style="display:none;" onclick="restartGame()">Restart</button>
+
+<!-- SOUND EFFECTS -->
+<audio id="eatSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
+<audio id="gameOverSound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+const scoreDisplay = document.getElementById("score");
+
+const eatSound = document.getElementById("eatSound");
+const gameOverSound = document.getElementById("gameOverSound");
+
+let snakeColor = "lime";
+let speed = 150;
+let interval;
+let snake, direction, food, score;
+
+// MENU START
+function startGame() {
+  document.getElementById("menu").style.display = "none";
+  canvas.style.display = "block";
+  document.querySelector("h2").style.display = "block";
+  document.getElementById("restartBtn").style.display = "inline-block";
+
+  snakeColor = document.getElementById("skin").value;
+
+  init();
+}
+
+// RESTART WITHOUT RELOADING
+function restartGame() {
+  clearInterval(interval);
+  init();
+}
+
+function init() {
+  speed = 150;
+  score = 0;
+  scoreDisplay.textContent = score;
+
+  snake = [{ x: 200, y: 200 }];
+  direction = "RIGHT";
+
+  food = {
+    x: Math.floor(Math.random() * 20) * 20,
+    y: Math.floor(Math.random() * 20) * 20
+  };
+
+  interval = setInterval(draw, speed);
+}
+
+// KEYBOARD CONTROLS
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
+  if (e.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
+  if (e.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
+  if (e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
+});
+
+// GRID BACKGROUND
+function drawGrid() {
+  ctx.strokeStyle = "#333";
+  for (let i = 0; i < 400; i += 20) {
+    ctx.strokeRect(i, 0, 20, 400);
+    ctx.strokeRect(0, i, 400, 20);
+  }
+}
+
+function draw() {
+  ctx.clearRect(0, 0, 400, 400);
+  drawGrid();
+
+  // Draw food
+  ctx.fillStyle = "red";
+  ctx.shadowColor = "red";
+  ctx.shadowBlur = 10;
+  ctx.fillRect(food.x, food.y, 20, 20);
+  ctx.shadowBlur = 0;
+
+  // Draw snake with chosen skin color
+  snake.forEach((s, i) => {
+    ctx.fillStyle = i === 0 ? snakeColor : snakeColor;
+    ctx.beginPath();
+    ctx.roundRect(s.x, s.y, 20, 20, 5);
+    ctx.fill();
+  });
+
+  // Move snake
+  let head = { ...snake[0] };
+  if (direction === "UP") head.y -= 20;
+  if (direction === "DOWN") head.y += 20;
+  if (direction === "LEFT") head.x -= 20;
+  if (direction === "RIGHT") head.x += 20;
+
+  // Self collision
+  for (let i = 1; i < snake.length; i++) {
+    if (head.x === snake[i].x && head.y === snake[i].y) {
+      return gameOver();
+    }
+  }
+
+  // Wall collision
+  if (head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400) {
+    return gameOver();
+  }
+
+  snake.unshift(head);
+
+  // Eat food
+  if (head.x === food.x && head.y === food.y) {
+    eatSound.play();
+    score++;
+    scoreDisplay.textContent = score;
+
+    food = {
+      x: Math.floor(Math.random() * 20) * 20,
+      y: Math.floor(Math.random() * 20) * 20
+    };
+
+    // Increase speed gradually
+    if (score % 3 === 0) {
+      speed = Math.max(50, speed - 15);
+      clearInterval(interval);
+      interval = setInterval(draw, speed);
+    }
+
+  } else {
+    snake.pop();
+  }
+}
+
+// GAME OVER FUNCTION
+function gameOver() {
+  gameOverSound.play();
+  alert("💀 Game Over!\nYour score: " + score);
+  restartGame();
+}
+</script>
+
+</body>
+</html>

@@ -4,6 +4,7 @@
     font-family: Jakarta, sans-serif;
 }
 
+
 body {
     background-color: #f2f7f8;
     display: flex;
@@ -26,7 +27,6 @@ wrapper {
 }
 
 
-
 wrapper.scrolled {
     box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.1);
     background-color: white;
@@ -43,7 +43,6 @@ header {
 .logoholder {
     width: 55%;
     height: 70%;
-    background-color: red;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -52,7 +51,6 @@ header {
 .logo {
     height: 100%;
     width: 27%;
-    background-color: greenyellow;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -252,39 +250,20 @@ header {
     align-items: center;
 }
 
+.hamburger {
+    display: none;
+    cursor: pointer;
 
-
-@media only screen and (max-width: 1000px) {
-    header {
-        width: 100%;
-        background-color: #083e9e;
+    .bar {
+        display: block;
+        width: 28px;
+        background-color: black;
+        height: 3px;
+        margin: 5px auto;
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
     }
-
-    .nav {
-        display: none;
-    }
-
-    .buttonholder {
-        display: none;
-    }
-
-    .logoholder {
-        width: 60%;
-        justify-content: flex-start;
-        margin-left: 20px;
-    }
-
-    .logo{
-       img{
-        width: 100%;
-        max-width: 900px;
-        
-       } 
-
-    }
-
 }
-
 
 
 .bodyholder {
@@ -292,6 +271,7 @@ header {
     width: 77%;
     margin-top: 11%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     align-items: flex-end;
 }
@@ -304,15 +284,16 @@ header {
     gap: 22px;
 
 
-    p {
-        font-size: 50px;
+    .first-text {
+        font-size: 3rem;
         font-weight: bold;
         margin-bottom: 1px;
+        color: #000;
     }
 
     .text {
         width: 90%;
-        height: 20%;
+        height: 22%;
         font-size: 20px;
         line-height: 30px;
         margin-bottom: 5px;
@@ -488,7 +469,7 @@ header {
 
 }
 
-.p {
+p {
     color: #3d4f60;
     opacity: 1;
     visibility: inherit;
@@ -528,15 +509,15 @@ header {
     margin-bottom: 50px;
 
 
-    h1 {
+    .build-up{
         font-size: 50px;
         font-weight: bold;
     }
 
-    p {
+
+    .interest{
         font-size: 24px;
-        color: #122231;
-        font-family: Jakarta, sans-serif;
+        color: #355676;
     }
 
 }
@@ -557,6 +538,7 @@ header {
     justify-content: space-between;
     flex-direction: column;
 }
+
 
 .savings {
     width: 100%;
@@ -882,13 +864,13 @@ header {
     margin-left: 31px;
     margin-top: 60px;
 
-    h2 {
+    .head-text{
         font-size: 40px;
         font-weight: bold;
         margin-bottom: 18px;
     }
 
-    p {
+    .body-text{
         font-size: 20px;
         color: #3d4f60;
     }
@@ -908,6 +890,18 @@ header {
     cursor: pointer;
     text-decoration: none;
     position: relative;
+
+    p{
+        color:  rgb(229, 40, 142);
+    }
+
+    .blue{
+        color: #003399;
+    }
+
+    .black{
+        color: #000;
+    }
 }
 
 
@@ -938,6 +932,10 @@ header {
     cursor: pointer;
     text-decoration: none;
     position: relative;
+
+    p{
+        color: rgb(255, 120, 60);;
+    }
 }
 
 .savings-wrapper2:after {
@@ -967,6 +965,10 @@ header {
     cursor: pointer;
     text-decoration: none;
     position: relative;
+
+    p{
+        color:  rgb(50, 150, 255);
+    }
 }
 
 .savings-wrapper3:after {
@@ -997,6 +999,10 @@ header {
     cursor: pointer;
     text-decoration: none;
     position: relative;
+
+    p{
+       color: rgb(6, 155, 64);
+    }
 }
 
 .savings-wrapper4:after {
@@ -1031,12 +1037,12 @@ header {
     align-items: center;
     flex-direction: column;
 
-    h1 {
+    .typo1 {
         font-size: 50px;
         font-weight: bold;
     }
 
-    p {
+    .typo2{
         font-size: 25px;
         color: #3d4f60;
     }
@@ -1059,14 +1065,14 @@ header {
     height: 80%;
     margin-left: 70px;
 
-    h1 {
+    .Earn{
         font-size: 35px;
         color: #fff;
         margin-top: 25px;
         margin-bottom: 40px;
     }
 
-    span {
+    .span {
         color: #fed6f1;
         font-size: 20px;
         line-height: 28px;
@@ -1085,6 +1091,10 @@ header {
     align-items: center;
     gap: 20px;
     position: relative;
+
+    p{
+        color: #fff;
+    }
 }
 
 

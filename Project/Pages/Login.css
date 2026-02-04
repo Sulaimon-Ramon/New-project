@@ -6,7 +6,7 @@
 }
 
 section {
-    width: 100vw;
+    width: full;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -14,7 +14,7 @@ section {
 }
 
 .form {
-    width: 32%;
+    width: 480px;
     height: 70%;
     gap: 30px;
     display: flex;
@@ -70,9 +70,16 @@ section {
         align-items: center;
         flex-direction: column;
 
-        p{
+        .nav{
             color: rgb(29, 78, 216);
             cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+
+            a{
+                text-decoration: none;
+                color: rgb(29, 78, 216);
+            }
         }
 
         span{
@@ -101,7 +108,7 @@ div1 {
     .icon {
         width: 50px;
         height: 50px;
-         margin-top: 15px;
+        margin-top: 15px;
         background-color: #0d60d8;
         border-radius: 30px;
         display: flex;

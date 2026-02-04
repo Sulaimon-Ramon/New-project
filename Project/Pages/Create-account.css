@@ -5,7 +5,7 @@
 }
 
 section {
-    width: 100vw;
+    width: full;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@ section {
 }
 
 .form {
-    width: 32%;
+    width: 480px;
     height: 55%;
     margin-top: 100px;
     gap: 30px;
@@ -27,6 +27,11 @@ section {
         cursor: pointer;
         font-weight: 600;
         font-size: 15px;
+
+        a{
+            text-decoration: none;
+            color: rgb(29, 78, 216);
+        }
     }
 
 }

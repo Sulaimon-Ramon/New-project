@@ -15,12 +15,11 @@ window.addEventListener('scroll', () => {
 
 const hamburger = document.querySelector(".hamburger");
 const nav = document.querySelector(".nav");
-const buttonholder = document.querySelector(".buttonholder");
 
 hamburger.addEventListener("click", () => {
     hamburger.classList.toggle("active");
     nav.classList.toggle("active");
-    buttonholder.classList.toggle("active");
+    // buttonholder.classList.toggle("active");
 })
 
 document.querySelectorAll(".nav").forEach(n => n.
@@ -29,9 +28,9 @@ document.querySelectorAll(".nav").forEach(n => n.
     nav.classList.remove("active");
 }))
 
-document.querySelectorAll(".buttonholder").forEach(n => n.
-    addEventListener("click", () => {
-    hamburger.classList.remove("active");
-    buttonholder.classList.remove("active");
-}))
+// document.querySelectorAll(".buttonholder").forEach(n => n.
+//     addEventListener("click", () => {
+//     hamburger.classList.remove("active");
+//     buttonholder.classList.remove("active");
+// }))
 

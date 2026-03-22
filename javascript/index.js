@@ -18,7 +18,7 @@ let fullName1 = "Jennifer";
 
 // Concatenation
 
-console.log("My full name is " + surname + " " + name);
+console.log("My full name is " + surname + " " + name + " and I am " + age + " Years old.");
 
 console.log(fullName + " " + fullName1);
 
@@ -97,20 +97,22 @@ if (myChoice == available) {
 
 
 
-var grade = 80;
+var grade = 100;
 
-if (grade <= 30 && grade <= 35) {
-    console.log("You passed with an F");
+if (grade <= 35) {
+    console.log("You failed with an F :" + " " + grade + " " + "Fail!");
 } else if (grade > 35 && grade <= 40) {
-    console.log("You passed with an E");
+    console.log("You passed with an E :" + " " + grade + " " + "Pass!");
 } else if (grade > 40 && grade <= 55) {
-    console.log("You passed with an D");
+    console.log("You passed with a D :" + " " + grade + " " + "Average!");
 } else if (grade > 55 && grade <= 70) {
-    console.log("You passed with an C");
+    console.log("You passed with a C :" + " " + grade + " " + "Credit!");
 } else if (grade > 70 && grade <= 79) {
-    console.log("You passed with an B");
-} else {
-    console.log("You passed with an A");
+    console.log("You passed with a B :" + " " + grade + " " + "Exccellent!");
+}else if (grade > 79 && grade <= 100) {
+    console.log("You passed with a A :" + " " + grade + " " + "Distinction!");
+}else {
+    console.log("Invalid Grade!");
 }
 
 
@@ -405,7 +407,8 @@ const car = {
         console.log("The car is moving");
     }
 }
-car.drive();
+
+console.log(car.drive());
 
 console.log(car);
 
@@ -765,7 +768,7 @@ function myFullname(firstName, lastName) {
     return firstName + " " + lastName;
 }
 
-console.log(myFullname("John", "Doe"));
+console.log(myFullname(firstName, lastName));
 
 
 function greet(name) {

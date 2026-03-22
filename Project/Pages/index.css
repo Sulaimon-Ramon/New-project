@@ -41,18 +41,17 @@ header {
 }
 
 .logoholder {
-    width: 55%;
+    width: 100%;
     height: 70%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    
 }
 
 .logo {
     height: 100%;
-    width: 27%;
+    width: 22%;
     display: flex;
-    justify-content: center;
     align-items: center;
 
     img {
@@ -62,10 +61,10 @@ header {
 
 .nav {
     height: 100%;
-    width: 64%;
+    width: 80%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 35px;
     position: relative;
 
     p1 {
@@ -209,16 +208,17 @@ header {
 }
 
 .buttonholder {
-    width: 25%;
+    width: 33%;
     height: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
+    margin-left: 132px;
 }
 
 .sign-in {
-    height: 70%;
+    height: 100%;
     width: 33%;
     cursor: pointer;
     font-size: 17px;
@@ -235,10 +235,9 @@ header {
 }
 
 .Create-free-account {
-    height: 70%;
+    height: 100%;
     width: 63%;
     cursor: pointer;
-    color: white;
     font-size: 17px;
     border-radius: 10px;
     background-color: rgb(18, 34, 49);

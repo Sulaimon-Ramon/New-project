@@ -1,10 +1,10 @@
 /* At Mobile Screen */
 
-@media only screen and (max-width: 993px) {
+@media only screen and (max-width: 566px) {
 
-    body {
+    /* body {
         background-color: aqua;
-    }
+    } */
 
     header {
         width: 100%;
@@ -13,7 +13,7 @@
 
     .nav {
         width: 100%;
-        height: auto;
+        height: 90vh;
         position: fixed;
         background-color: #f2f7f8;
         left: -100%;
@@ -22,8 +22,8 @@
         font-weight: 500;
         text-align: center;
         margin-top: .40rem;
+        display: flex;
         flex-direction: column;
-        justify-content: flex-start;
         transition: 0.3s ease-in-out;
         padding-top: 4.5rem;
     }
@@ -39,32 +39,24 @@
         color: #1d3246;
     }
 
-    .buttonholder {
+    .buttonholder{
         width: 100%;
-        background-color: #f2f7f8;
-        position: fixed;
-        left: -100%;
-        top: 450px;
-        gap: 20px;
+        display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        transition: 0.3s;
-        z-index: -1;
-        padding-top: 2rem;
+        margin-left: 0px;
+        padding-top: 50px;
     }
 
-    .buttonholder.active {
-        left: 0;
-    }
+
 
     .dropdown {
         width: 90%;
-        height: 35vh;
+        height: 36vh;
         background-color: white;
         position: absolute;
         border-radius: 10px;
         color: black;
-        top: 110px;
+        top: 90px;
         left: 23px;
         z-index: 1;
         box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
@@ -124,7 +116,7 @@
         position: absolute;
         border-radius: 10px;
         color: black;
-        top: 380px;
+        top: 370px;
         left: 20px;
         box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
         z-index: 10;
@@ -133,12 +125,12 @@
 
     .sign-in {
         width: 90%;
-        height: 8%;
+        height: 25%;
     }
 
     .Create-free-account {
         width: 90%;
-        height: 8%;
+        height: 25%;
     }
 
     .logoholder {
@@ -151,6 +143,7 @@
 
     .hamburger {
         display: block;
+        margin-left: 250px;
     }
 
 
